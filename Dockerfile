@@ -1,5 +1,5 @@
-# ── Build stage ─────────────────────────────────────────────
-FROM node:20-alpine AS build
+# — Build stage —
+FROM node:20-bookworm-slim AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -7,8 +7,8 @@ COPY tsconfig.json ./
 COPY src ./src
 RUN npm run build
 
-# ── Runtime stage ───────────────────────────────────────────
-FROM node:20-alpine
+# — Runtime stage —
+FROM node:20-bookworm-slim
 WORKDIR /app
 ENV NODE_ENV=production
 COPY package*.json ./
